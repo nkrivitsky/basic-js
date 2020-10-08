@@ -1,18 +1,11 @@
 const CustomError = require("../extensions/custom-error");
 
 const chainMaker = {
-    checkInternal() {
-        if (this['array'] == undefined) {
-            this['array'] = []
-        }
-    },
+    array: [],
     getLength() {
-        this.checkInternal()
-
         return this.array.length
     },
     addLink(value) {
-        this.checkInternal()
         let str = ''
         if (value === undefined) {
             str = ''
@@ -26,27 +19,22 @@ const chainMaker = {
         return this
     },
     removeLink(position) {
-        this.checkInternal()
-
-        if (!Number.isInteger(position) || position - 1 < 0 || position > this.array.length) throw new Error('No such possition')
-
-        this.array.splice(position - 1, 1);
-
-        return this
+        if (!Number.isInteger(position) || position - 1 < 0 || position > this.array.length) {
+            this.array = []
+            throw new Error('No such possition')
+        } else {
+            this.array.splice(position - 1, 1);
+            return this
+        }
     },
     reverseChain() {
-        this.checkInternal();
-
         this.array = this.array.reverse();
 
         return this;
     },
     finishChain() {
-        this.checkInternal()
         if (this.array.length == 0) return ""
-
-        let str = this.array.join("~~")
-
+        let str = this.array.slice().join("~~")
         this.array = []
 
         return str
