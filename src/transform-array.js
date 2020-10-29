@@ -6,13 +6,6 @@ module.exports = function transform(arr) {
     if (!Array.isArray(arr)) throw new Error('Not array');
 
     let result = [];
-    /*
-     * `--discard-next` исключает следующий за ней элемент исходного массива из преобразованного массива.
-     * `--discard-prev` исключает предшествующий ей элемент исходного массива из преобразованного массива.
-     * `--double-next` ..
-     * `--double-prev` удваивает предшествующий ей элемент исходного массива в преобразованном массиве.
-     */
-
 
     for (let i = 0; i < arr.length; i++) {
         let item = arr[i];
